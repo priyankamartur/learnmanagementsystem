@@ -33,13 +33,21 @@ const CourseCard = ({ course }: CourseCardProps) => {
             <span className="text-xs font-medium text-muted-foreground">{course.instructor}</span>
           </div>
           <div className="flex items-center justify-between pt-3 border-t">
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-              <BookOpen className="h-3.5 w-3.5" />
-              <span>{course.totalLessons} lessons</span>
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-bold text-primary">${course.price}</span>
+              {course.originalPrice && (
+                <span className="text-xs text-muted-foreground line-through">${course.originalPrice}</span>
+              )}
             </div>
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-              <Clock className="h-3.5 w-3.5" />
-              <span>{course.totalDuration}</span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                <BookOpen className="h-3.5 w-3.5" />
+                <span>{course.totalLessons}</span>
+              </div>
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="h-3.5 w-3.5" />
+                <span>{course.totalDuration}</span>
+              </div>
             </div>
           </div>
         </div>

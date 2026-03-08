@@ -46,13 +46,21 @@ const CourseDetail = () => {
               <Clock className="h-4 w-4" /> {course.totalDuration}
             </div>
           </div>
-          <Button
-            size="lg"
-            className="mt-8 gradient-primary border-0 text-primary-foreground font-semibold"
-            onClick={() => navigate(`/learn/${course.id}`)}
-          >
-            Start Learning
-          </Button>
+          <div className="flex flex-wrap items-center gap-4 mt-8">
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-extrabold text-primary-foreground">${course.price}</span>
+              {course.originalPrice && (
+                <span className="text-lg text-navy-foreground/50 line-through">${course.originalPrice}</span>
+              )}
+            </div>
+            <Button
+              size="lg"
+              className="gradient-primary border-0 text-primary-foreground font-semibold"
+              onClick={() => navigate(`/learn/${course.id}`)}
+            >
+              Enroll Now
+            </Button>
+          </div>
         </div>
       </div>
 

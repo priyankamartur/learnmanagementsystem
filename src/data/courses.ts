@@ -23,6 +23,8 @@ export interface Course {
   category: string;
   totalLessons: number;
   totalDuration: string;
+  price: number;
+  originalPrice?: number;
   sections: Section[];
   learningPoints: string[];
 }
@@ -39,6 +41,8 @@ export const courses: Course[] = [
     category: "Web Development",
     totalLessons: 8,
     totalDuration: "4h 30m",
+    price: 49.99,
+    originalPrice: 89.99,
     learningPoints: [
       "Build powerful, fast, user-friendly and reactive web apps",
       "Apply for high-paid jobs or work as a freelancer",
@@ -85,6 +89,8 @@ export const courses: Course[] = [
     category: "Data Science",
     totalLessons: 6,
     totalDuration: "3h 15m",
+    price: 39.99,
+    originalPrice: 69.99,
     learningPoints: [
       "Understand core ML algorithms and when to use them",
       "Work with NumPy, Pandas, and Scikit-learn",
@@ -123,6 +129,8 @@ export const courses: Course[] = [
     category: "Programming",
     totalLessons: 7,
     totalDuration: "5h 10m",
+    price: 59.99,
+    originalPrice: 99.99,
     learningPoints: [
       "Master Java fundamentals and OOP concepts",
       "Build real-world applications from scratch",
@@ -161,6 +169,8 @@ export const courses: Course[] = [
     category: "Computer Science",
     totalLessons: 6,
     totalDuration: "3h 45m",
+    price: 34.99,
+    originalPrice: 59.99,
     learningPoints: [
       "Understand Big-O notation and complexity analysis",
       "Implement arrays, linked lists, trees, and graphs",

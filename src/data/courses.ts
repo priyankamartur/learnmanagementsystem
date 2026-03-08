@@ -89,6 +89,8 @@ export const courses: Course[] = [
     category: "Data Science",
     totalLessons: 6,
     totalDuration: "3h 15m",
+    price: 39.99,
+    originalPrice: 69.99,
     learningPoints: [
       "Understand core ML algorithms and when to use them",
       "Work with NumPy, Pandas, and Scikit-learn",

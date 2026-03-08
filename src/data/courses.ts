@@ -41,6 +41,8 @@ export const courses: Course[] = [
     category: "Web Development",
     totalLessons: 8,
     totalDuration: "4h 30m",
+    price: 49.99,
+    originalPrice: 89.99,
     learningPoints: [
       "Build powerful, fast, user-friendly and reactive web apps",
       "Apply for high-paid jobs or work as a freelancer",

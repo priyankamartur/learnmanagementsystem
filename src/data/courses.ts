@@ -129,6 +129,8 @@ export const courses: Course[] = [
     category: "Programming",
     totalLessons: 7,
     totalDuration: "5h 10m",
+    price: 59.99,
+    originalPrice: 99.99,
     learningPoints: [
       "Master Java fundamentals and OOP concepts",
       "Build real-world applications from scratch",

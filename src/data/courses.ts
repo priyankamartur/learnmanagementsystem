@@ -23,6 +23,8 @@ export interface Course {
   category: string;
   totalLessons: number;
   totalDuration: string;
+  price: number;
+  originalPrice?: number;
   sections: Section[];
   learningPoints: string[];
 }

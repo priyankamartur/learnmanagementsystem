@@ -169,6 +169,8 @@ export const courses: Course[] = [
     category: "Computer Science",
     totalLessons: 6,
     totalDuration: "3h 45m",
+    price: 34.99,
+    originalPrice: 59.99,
     learningPoints: [
       "Understand Big-O notation and complexity analysis",
       "Implement arrays, linked lists, trees, and graphs",

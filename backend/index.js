@@ -44,12 +44,30 @@ const getDb = () => {
 };
 
 const saveDb = (data) => {
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  } catch (e) {
+    console.error("Error saving DB:", e);
+  }
 };
 
 // --- BACKEND API ENDPOINTS ---
 
-// Health Check Endpoint
+// Root & Health Check Endpoint
+app.get("/", (req, res) => {
+  res.json({
+    status: "ok",
+    service: "LearnHub LMS Express Backend API",
+    totalCourses: courses.length,
+    endpoints: {
+      health: "/api/health",
+      courses: "/api/courses",
+      register: "POST /api/auth/register",
+      login: "POST /api/auth/login"
+    }
+  });
+});
+
 app.get("/api/health", (req, res) => {
   res.json({
     status: "ok",
@@ -201,6 +219,6 @@ app.put("/api/profile/:id", (req, res) => {
   res.json({ message: "Profile updated successfully!", user: updatedUser });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 LearnHub LMS Express Backend API running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 LearnHub LMS Express Backend API running on port ${PORT}`);
 });

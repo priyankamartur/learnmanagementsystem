@@ -105,11 +105,18 @@ export const courses: Course[] = [
         ],
         quiz: [
           {
-            id: "q1",
-            question: "Which hook is used to manage local state in React?",
+            id: "rq1",
+            question: "Which hook is used to declare local component state in React?",
             options: ["useEffect", "useState", "useContext", "useReducer"],
             correctAnswer: 1,
-            explanation: "useState is the built-in React hook for state management."
+            explanation: "useState is the primary React hook for state management in functional components."
+          },
+          {
+            id: "rq2",
+            question: "What does JSX stand for in React?",
+            options: ["JavaScript XML", "Java Syntax Extension", "JSON XML System", "JavaScript Execution"],
+            correctAnswer: 0,
+            explanation: "JSX stands for JavaScript XML, allowing HTML-like syntax inside JS."
           }
         ]
       },
@@ -119,6 +126,20 @@ export const courses: Course[] = [
         lessons: [
           { id: "r4", title: "4. useState & useEffect Best Practices", duration: "25:00", youtubeId: "O6P86uwfdR0", order: 4 },
           { id: "r5", title: "5. Context API & Global State", duration: "20:15", youtubeId: "5LrDIWkK_Bc", order: 5 },
+        ],
+        quiz: [
+          {
+            id: "rq3",
+            question: "When does the cleanup function inside useEffect execute?",
+            options: [
+              "Before every render",
+              "Before component unmounting or before re-running the effect",
+              "Only on errors",
+              "After initial mount only"
+            ],
+            correctAnswer: 1,
+            explanation: "The cleanup function returned by useEffect runs before unmount and before re-running when dependencies change."
+          }
         ]
       }
     ],
@@ -152,36 +173,15 @@ export const courses: Course[] = [
         lessons: [
           { id: "vl1", title: "1. Intro to Vue 3 & Vite", duration: "15:00", youtubeId: "FXpIoQ_rT_c", order: 1 },
           { id: "vl2", title: "2. Reactivity with ref() and reactive()", duration: "20:00", youtubeId: "bzkRVzciAZg", order: 2 }
-        ]
-      }
-    ],
-    reviews: []
-  },
-  {
-    id: "angular-enterprise",
-    title: "Angular 18 Enterprise Architecture & RxJS",
-    description: "Build robust scalable enterprise applications with Angular Signals, RxJS streams, and NgRx.",
-    longDescription: "Master modern Angular 18 with standalone components, Signals reactivity, RxJS reactive programming, control flow syntax, and enterprise state with NgRx.",
-    thumbnail: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=450&fit=crop",
-    instructor: "Vikram Malhotra",
-    instructorTitle: "Google Developer Expert in Angular",
-    instructorAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-    category: "Web Development",
-    level: "Advanced",
-    rating: 4.75,
-    reviewCount: 680,
-    totalLessons: 7,
-    totalDuration: "4h 50m",
-    price: 3499,
-    originalPrice: 5999,
-    learningPoints: ["Master Angular Signals & Standalone Components", "Reactive state streams with RxJS"],
-    requirements: ["TypeScript experience"],
-    sections: [
-      {
-        id: "ang1",
-        title: "Section 1: Angular Signals & Control Flow",
-        lessons: [
-          { id: "al1", title: "1. Angular 18 Architecture Overview", duration: "22:00", youtubeId: "Ata9cSC2WpM", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "vq1",
+            question: "In Vue 3 Composition API, how do you declare a reactive primitive variable?",
+            options: ["const count = ref(0)", "const count = useState(0)", "let count = 0", "const count = reactive(0)"],
+            correctAnswer: 0,
+            explanation: "ref() is used for primitive reactive state values in Vue 3."
+          }
         ]
       }
     ],
@@ -210,39 +210,18 @@ export const courses: Course[] = [
     sections: [
       {
         id: "node1",
-        title: "Section 1: Express Server & Routing",
+        title: "Section 1: Express Server & Middleware",
         lessons: [
           { id: "nl1", title: "1. Intro to Node Event Loop & Express", duration: "18:00", youtubeId: "Oe421EPjeBE", order: 1 }
-        ]
-      }
-    ],
-    reviews: []
-  },
-  {
-    id: "sveltekit-fullstack",
-    title: "Svelte 5 & SvelteKit Modern Full-Stack Development",
-    description: "Build blazing-fast web apps with Svelte 5 Runes, SvelteKit server routes, and Tailwind CSS.",
-    longDescription: "Explore the simplicity of Svelte 5 and SvelteKit. Learn compiler-based reactivity, Svelte Runes ($state, $derived), form actions, page layouts, and server endpoints.",
-    thumbnail: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=450&fit=crop",
-    instructor: "Rich Harris Fanatic",
-    instructorTitle: "Frontend Architect",
-    instructorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
-    category: "Web Development",
-    level: "Beginner",
-    rating: 4.89,
-    reviewCount: 520,
-    totalLessons: 6,
-    totalDuration: "3h 20m",
-    price: 2499,
-    originalPrice: 4499,
-    learningPoints: ["Master Svelte 5 Runes reactivity", "Build full-stack web applications with SvelteKit"],
-    requirements: ["Basic HTML/CSS/JS"],
-    sections: [
-      {
-        id: "sv1",
-        title: "Section 1: Svelte 5 Runes",
-        lessons: [
-          { id: "svl1", title: "1. Intro to Svelte 5 Compiler", duration: "15:00", youtubeId: "rv3Yq-B8y7c", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "nq1",
+            question: "What signature does Express middleware function use?",
+            options: ["(req, res, next)", "(req, res)", "(event, callback)", "(err, req)"],
+            correctAnswer: 0,
+            explanation: "Express middleware takes (req, res, next) arguments to pass control down the chain."
+          }
         ]
       }
     ],
@@ -277,10 +256,19 @@ export const courses: Course[] = [
     sections: [
       {
         id: "py-basics",
-        title: "Section 1: Python Fundamentals",
+        title: "Section 1: Python Data Analysis Fundamentals",
         lessons: [
           { id: "p1", title: "1. Python Crash Course & Jupyter Notebooks", duration: "20:00", youtubeId: "JJmcL1N2KQs", order: 1 },
           { id: "p2", title: "2. Vectorized Data Processing with NumPy & Pandas", duration: "25:00", youtubeId: "QUT1VHiLmmI", order: 2 }
+        ],
+        quiz: [
+          {
+            id: "pq1",
+            question: "Which library in Python provides tabular DataFrame data structures?",
+            options: ["Pandas", "Matplotlib", "Flask", "SciPy"],
+            correctAnswer: 0,
+            explanation: "Pandas is the premier library for DataFrame tabular data manipulation."
+          }
         ]
       }
     ],
@@ -312,97 +300,15 @@ export const courses: Course[] = [
         title: "Section 1: PyTorch Tensors & Autograd",
         lessons: [
           { id: "dll1", title: "1. Tensor Operations & GPU Acceleration", duration: "25:00", youtubeId: "V_xro1bcAuA", order: 1 }
-        ]
-      }
-    ],
-    reviews: []
-  },
-  {
-    id: "llm-prompt-engineering",
-    title: "Generative AI, LangChain & LLM Application Building",
-    description: "Build AI agents, RAG search pipelines, and custom LLM chatbots using LangChain, LlamaIndex & OpenAI API.",
-    longDescription: "Learn how to build production-grade Generative AI applications. Master prompt engineering, retrieval-augmented generation (RAG) with vector databases (Pinecone/Chroma), LangChain agents, and fine-tuning open-source LLMs.",
-    thumbnail: "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=800&h=450&fit=crop",
-    instructor: "Harrison Chase Tech",
-    instructorTitle: "GenAI Architect",
-    instructorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
-    category: "Data Science & AI",
-    level: "Intermediate",
-    rating: 4.93,
-    reviewCount: 2100,
-    totalLessons: 7,
-    totalDuration: "4h 15m",
-    price: 3999,
-    originalPrice: 6999,
-    featured: true,
-    learningPoints: ["Build RAG applications with LangChain & Vector DBs", "Deploy autonomous AI agents & chatbots"],
-    requirements: ["Python programming"],
-    sections: [
-      {
-        id: "llm1",
-        title: "Section 1: Prompt Engineering & OpenAI API",
-        lessons: [
-          { id: "ll1", title: "1. OpenAI API Fundamentals & Embeddings", duration: "20:00", youtubeId: "ab1H3X754mg", order: 1 }
-        ]
-      }
-    ],
-    reviews: []
-  },
-  {
-    id: "computer-vision-opencv",
-    title: "Computer Vision with OpenCV & YOLOv8",
-    description: "Master object detection, face recognition, autonomous driving vision, and image processing.",
-    longDescription: "Learn computer vision using Python, OpenCV, and YOLOv8. Build real-time object detection systems, face recognition pipelines, optical flow motion trackers, and lane detection algorithms.",
-    thumbnail: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=800&h=450&fit=crop",
-    instructor: "Dr. Adrian Rosebrock",
-    instructorTitle: "Computer Vision Author",
-    instructorAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-    category: "Data Science & AI",
-    level: "Intermediate",
-    rating: 4.86,
-    reviewCount: 740,
-    totalLessons: 6,
-    totalDuration: "3h 50m",
-    price: 3299,
-    originalPrice: 5499,
-    learningPoints: ["Implement OpenCV image filtering & transformations", "Train custom YOLOv8 object detectors"],
-    requirements: ["Basic Python knowledge"],
-    sections: [
-      {
-        id: "cv1",
-        title: "Section 1: OpenCV Image Fundamentals",
-        lessons: [
-          { id: "cvl1", title: "1. Reading, Writing & Manipulating Pixels", duration: "18:00", youtubeId: "oXlwWbU8l2o", order: 1 }
-        ]
-      }
-    ],
-    reviews: []
-  },
-  {
-    id: "nlp-transformers-huggingface",
-    title: "Natural Language Processing (NLP) with Hugging Face",
-    description: "Build text classification, sentiment analysis, translation, and text summarization models with Transformers.",
-    longDescription: "Master Modern NLP using Hugging Face Transformers, BERT, RoBERTa, and T5 models. Learn tokenization, fine-tuning pretrained models for sentiment analysis, text classification, and named entity recognition.",
-    thumbnail: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop",
-    instructor: "Maria Garcia",
-    instructorTitle: "NLP Researcher at HuggingFace Community",
-    instructorAvatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop",
-    category: "Data Science & AI",
-    level: "Advanced",
-    rating: 4.87,
-    reviewCount: 620,
-    totalLessons: 6,
-    totalDuration: "4h 00m",
-    price: 3499,
-    originalPrice: 5999,
-    learningPoints: ["Understand Transformer Attention mechanisms", "Fine-tune BERT for custom classification tasks"],
-    requirements: ["Python & PyTorch/TensorFlow basics"],
-    sections: [
-      {
-        id: "nlp1",
-        title: "Section 1: Tokenization & Attention Architecture",
-        lessons: [
-          { id: "nlpl1", title: "1. Intro to Self-Attention & Transformers", duration: "22:00", youtubeId: "S27pHKBEp30", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "dlq1",
+            question: "What PyTorch feature automatically calculates gradients during backpropagation?",
+            options: ["Autograd", "TorchVision", "DataLoader", "CUDA Sync"],
+            correctAnswer: 0,
+            explanation: "Autograd automatically records operations and calculates gradients for gradient descent."
+          }
         ]
       }
     ],
@@ -410,37 +316,6 @@ export const courses: Course[] = [
   },
 
   // 3. Mobile Development
-  {
-    id: "react-native-mastery",
-    title: "React Native & Expo Full-Stack Mobile Development",
-    description: "Build cross-platform iOS and Android apps using React Native, Expo, and Firebase.",
-    longDescription: "Master mobile app development for iOS and Android using React Native and Expo. Build beautiful mobile UIs, handle navigation with React Navigation, access native device APIs (camera, GPS), and deploy to Apple App Store & Google Play Store.",
-    thumbnail: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop",
-    instructor: "David Miller",
-    instructorTitle: "Mobile Lead at Uber",
-    instructorAvatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop",
-    category: "Mobile Development",
-    level: "Intermediate",
-    rating: 4.91,
-    reviewCount: 1280,
-    totalLessons: 7,
-    totalDuration: "4h 20m",
-    price: 3499,
-    originalPrice: 5999,
-    featured: true,
-    learningPoints: ["Build native iOS & Android apps with a single codebase", "Integrate camera, location, and push notifications"],
-    requirements: ["React basics"],
-    sections: [
-      {
-        id: "rn1",
-        title: "Section 1: React Native Layouts & Flexbox",
-        lessons: [
-          { id: "rnl1", title: "1. Expo Workflow vs Bare React Native", duration: "16:00", youtubeId: "0-S5a0eXPoc", order: 1 }
-        ]
-      }
-    ],
-    reviews: []
-  },
   {
     id: "flutter-dart-bootcamp",
     title: "Flutter 3 & Dart Complete Mobile App Bootcamp",
@@ -467,6 +342,15 @@ export const courses: Course[] = [
         title: "Section 1: Dart Fundamentals & Flutter Setup",
         lessons: [
           { id: "fll1", title: "1. Intro to Flutter Architecture & Widgets", duration: "20:00", youtubeId: "x0uinJYeNxw", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "flq1",
+            question: "Everything in Flutter UI layout is a _____?",
+            options: ["Widget", "View", "Component", "Activity"],
+            correctAnswer: 0,
+            explanation: "In Flutter, almost everything (layouts, padding, text, buttons) is a Widget."
+          }
         ]
       }
     ],
@@ -500,6 +384,15 @@ export const courses: Course[] = [
         title: "Section 1: Network Scanning & Reconnaissance",
         lessons: [
           { id: "ehl1", title: "1. Kali Linux Lab Setup & Nmap Scanning", duration: "25:00", youtubeId: "3Kq1MIfTWCE", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "ehq1",
+            question: "Which tool is standard for network port discovery and security auditing?",
+            options: ["Nmap", "Postman", "Figma", "Docker"],
+            correctAnswer: 0,
+            explanation: "Nmap is the Industry standard open-source network scanner for vulnerability discovery."
+          }
         ]
       }
     ],
@@ -533,6 +426,15 @@ export const courses: Course[] = [
         title: "Section 1: Docker & Orchestration",
         lessons: [
           { id: "d1", title: "1. Intro to Containerization & Docker", duration: "25:00", youtubeId: "3c-iBn73dDE", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "dq1",
+            question: "What file defines instructions to build a Docker container image?",
+            options: ["Dockerfile", "docker-compose.yml", "package.json", "index.html"],
+            correctAnswer: 0,
+            explanation: "Dockerfile contains step-by-step instructions to assemble a Docker container image."
+          }
         ]
       }
     ],
@@ -570,6 +472,15 @@ export const courses: Course[] = [
         title: "Section 1: UX Principles & Wireframing",
         lessons: [
           { id: "u1", title: "1. Foundations of UX Psychology", duration: "18:00", youtubeId: "c9Wg6Cb_YlU", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "uxq1",
+            question: "Which Figma feature allows responsive component resizing based on content?",
+            options: ["Auto-Layout", "Smart Animate", "Variant Switch", "Grid Overlay"],
+            correctAnswer: 0,
+            explanation: "Auto-Layout allows components to shrink/grow dynamically with content."
+          }
         ]
       }
     ],
@@ -603,6 +514,20 @@ export const courses: Course[] = [
         title: "Section 1: Distributed Systems Building Blocks",
         lessons: [
           { id: "sdl1", title: "1. CAP Theorem, Load Balancing & CDN", duration: "25:00", youtubeId: "i7twT3GBUZY", order: 1 }
+        ],
+        quiz: [
+          {
+            id: "sdq1",
+            question: "In CAP Theorem, what three guarantees are balanced?",
+            options: [
+              "Consistency, Availability, Partition Tolerance",
+              "Concurrency, Accuracy, Performance",
+              "Caching, API, Persistence",
+              "Control, Authentication, Privacy"
+            ],
+            correctAnswer: 0,
+            explanation: "CAP theorem states a distributed system can guarantee at most two of: Consistency, Availability, and Partition Tolerance."
+          }
         ]
       }
     ],
@@ -610,7 +535,7 @@ export const courses: Course[] = [
   }
 ];
 
-// Dynamically generate remaining up to 52 courses with INR pricing
+// Dynamically generate remaining up to 52 courses with section quizzes
 const instructorsList = [
   { name: "Dr. Alan Turing", title: "AI Researcher", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" },
   { name: "Sophia Rodriguez", title: "Lead Architect", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" },
@@ -663,7 +588,7 @@ topics.forEach((t, i) => {
     id: `course-ext-${i + 1}`,
     title: t.name,
     description: `Complete guide to ${t.name}. Build real production projects with step-by-step guidance.`,
-    longDescription: `Master ${t.name} with industry best practices. This course includes video lessons, hands-on exercises, code downloads, and an official certificate of completion.`,
+    longDescription: `Master ${t.name} with industry best practices. This course includes video lessons, hands-on exercises, section quizzes, code downloads, and an official certificate of completion.`,
     thumbnail: t.img,
     instructor: inst.name,
     instructorTitle: inst.title,
@@ -679,7 +604,7 @@ topics.forEach((t, i) => {
     learningPoints: [
       `Master core concepts of ${t.name}`,
       "Build real-world portfolio projects",
-      "Understand performance optimization best practices"
+      "Pass section knowledge check quizzes"
     ],
     requirements: ["Basic computer literacy and programming setup"],
     sections: [
@@ -689,6 +614,15 @@ topics.forEach((t, i) => {
         lessons: [
           { id: `les-ext-${i}-1`, title: `1. Introduction to ${t.name}`, duration: "15:00", youtubeId: "Tn6-PIqc4UM", order: 1 },
           { id: `les-ext-${i}-2`, title: `2. Architecture & Configuration`, duration: "20:00", youtubeId: "9YkUCRhBz6k", order: 2 }
+        ],
+        quiz: [
+          {
+            id: `q-ext-${i}`,
+            question: `What is a core benefit of mastering ${t.name}?`,
+            options: ["High performance & industry demand", "No practice required", "Replaces HTML", "Only works offline"],
+            correctAnswer: 0,
+            explanation: `${t.name} delivers high performance and industry demand.`
+          }
         ]
       }
     ],

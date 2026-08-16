@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { courses } from "@/data/courses";
+import type { QuizQuestion } from "@/data/courses";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PaymentModal from "@/components/PaymentModal";
+import QuizModal from "@/components/QuizModal";
 import {
   Clock,
   BookOpen,
@@ -15,7 +17,8 @@ import {
   PlayCircle,
   ShieldCheck,
   UserCheck,
-  CreditCard
+  CreditCard,
+  HelpCircle
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { toast } from "sonner";
@@ -30,6 +33,9 @@ const CourseDetail = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+
+  // Quiz Modal State
+  const [activeQuiz, setActiveQuiz] = useState<{ title: string; questions: QuizQuestion[] } | null>(null);
 
   useEffect(() => {
     if (course) {
@@ -168,7 +174,7 @@ const CourseDetail = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <UserCheck className="h-4 w-4 text-emerald-500 shrink-0" />
-                  <span>Access on Mobile and Desktop</span>
+                  <span>Interactive Section Quizzes Included</span>
                 </div>
               </div>
             </div>
@@ -182,7 +188,7 @@ const CourseDetail = () => {
         <div className="flex border-b mb-8 overflow-x-auto scrollbar-none gap-8">
           {[
             { id: "overview", label: "Overview" },
-            { id: "curriculum", label: "Curriculum" },
+            { id: "curriculum", label: "Curriculum & Quizzes" },
             { id: "instructor", label: "Instructor" },
             { id: "reviews", label: "Reviews" },
             { id: "faq", label: "FAQs" },
@@ -239,12 +245,12 @@ const CourseDetail = () => {
             </div>
           )}
 
-          {/* TAB 2: CURRICULUM */}
+          {/* TAB 2: CURRICULUM & QUIZZES */}
           {activeTab === "curriculum" && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-bold">Course Content</h3>
+                  <h3 className="text-xl font-bold">Course Content & Practice Quizzes</h3>
                   <p className="text-xs text-muted-foreground">
                     {course.sections.length} sections · {course.totalLessons} lessons · {course.totalDuration} total length
                   </p>
@@ -274,6 +280,24 @@ const CourseDetail = () => {
                             <span className="text-xs text-muted-foreground">{lesson.duration}</span>
                           </li>
                         ))}
+
+                        {/* Quiz Trigger in Section */}
+                        {section.quiz && (
+                          <li className="pt-2">
+                            <button
+                              onClick={() => setActiveQuiz({ title: section.title, questions: section.quiz! })}
+                              className="w-full flex items-center justify-between p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-xs font-bold"
+                            >
+                              <span className="flex items-center gap-2">
+                                <HelpCircle className="h-4 w-4 text-amber-500" />
+                                Take Section Quiz: {section.title}
+                              </span>
+                              <Badge className="bg-amber-500 text-white text-[10px] border-0">
+                                {section.quiz.length} Questions
+                              </Badge>
+                            </button>
+                          </li>
+                        )}
                       </ul>
                     </AccordionContent>
                   </AccordionItem>
@@ -341,6 +365,16 @@ const CourseDetail = () => {
           )}
         </div>
       </div>
+
+      {/* Quiz Modal */}
+      {activeQuiz && (
+        <QuizModal
+          isOpen={activeQuiz !== null}
+          onClose={() => setActiveQuiz(null)}
+          title={activeQuiz.title}
+          questions={activeQuiz.questions}
+        />
+      )}
 
       {/* Payment Checkout Modal */}
       <PaymentModal

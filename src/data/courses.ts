@@ -1,3 +1,59 @@
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+}
+
+export interface Lesson {
+  id: string;
+  title: string;
+  duration: string;
+  youtubeId: string;
+  order: number;
+}
+
+export interface Section {
+  id: string;
+  title: string;
+  lessons: Lesson[];
+  quiz?: QuizQuestion[];
+}
+
+export interface Review {
+  id: string;
+  user: string;
+  avatar: string;
+  rating: number;
+  date: string;
+  comment: string;
+}
+
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  thumbnail: string;
+  instructor: string;
+  instructorTitle: string;
+  instructorAvatar: string;
+  category: string;
+  level: "Beginner" | "Intermediate" | "Advanced";
+  rating: number;
+  reviewCount: number;
+  totalLessons: number;
+  totalDuration: string;
+  price: number;
+  originalPrice?: number;
+  sections: Section[];
+  learningPoints: string[];
+  requirements: string[];
+  reviews: Review[];
+  featured?: boolean;
+}
+
 export const categories = [
   "All",
   "Web Development",
@@ -12,7 +68,7 @@ export const categories = [
   "Programming Languages"
 ];
 
-export const courses = [
+export const courses: Course[] = [
   // 1. Web Dev
   {
     id: "react-complete",

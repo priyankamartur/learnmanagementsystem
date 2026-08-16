@@ -2,24 +2,29 @@ import { useState, useEffect } from "react";
 import { Clock, BookOpen, Star, Bookmark, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import type { Course } from "@/data/courses";
 
-export const CourseCard = ({ course }) => {
+interface CourseCardProps {
+  course: Course;
+}
+
+export const CourseCard = ({ course }: CourseCardProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isEnrolled, setIsEnrolled] = useState(false);
 
   useEffect(() => {
-    const savedBookmarks = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
+    const savedBookmarks: string[] = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
     setIsBookmarked(savedBookmarks.includes(course.id));
 
     const savedProgress = localStorage.getItem(`progress-${course.id}`);
     setIsEnrolled(savedProgress !== null);
   }, [course.id]);
 
-  const toggleBookmark = (e) => {
+  const toggleBookmark = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const savedBookmarks = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
-    let updated;
+    const savedBookmarks: string[] = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
+    let updated: string[];
 
     if (savedBookmarks.includes(course.id)) {
       updated = savedBookmarks.filter((id) => id !== course.id);

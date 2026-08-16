@@ -6,14 +6,21 @@ import { Badge } from "@/components/ui/badge";
 import { User, Mail, Lock, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 
-export const AuthModal = ({ isOpen, onClose, initialMode = "register", onAuthSuccess }) => {
-  const [mode, setMode] = useState(initialMode);
+interface AuthModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  initialMode?: "login" | "register";
+  onAuthSuccess?: (user: any) => void;
+}
+
+export const AuthModal = ({ isOpen, onClose, initialMode = "register", onAuthSuccess }: AuthModalProps) => {
+  const [mode, setMode] = useState<"login" | "register">(initialMode);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 

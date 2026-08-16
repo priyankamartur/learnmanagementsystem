@@ -2,18 +2,26 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { HelpCircle, CheckCircle2, XCircle, Trophy, RotateCcw, ArrowRight } from "lucide-react";
+import { HelpCircle, CheckCircle2, Trophy, RotateCcw, ArrowRight } from "lucide-react";
+import type { QuizQuestion } from "@/data/courses";
 
-export const QuizModal = ({ isOpen, onClose, title, questions }) => {
+interface QuizModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  questions: QuizQuestion[];
+}
+
+export const QuizModal = ({ isOpen, onClose, title, questions }: QuizModalProps) => {
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [submitted, setSubmitted] = useState(false);
 
   if (!questions || questions.length === 0) return null;
 
   const currentQ = questions[currentIdx];
 
-  const handleSelectOption = (optionIdx) => {
+  const handleSelectOption = (optionIdx: number) => {
     if (submitted) return;
     setSelectedAnswers({ ...selectedAnswers, [currentIdx]: optionIdx });
   };

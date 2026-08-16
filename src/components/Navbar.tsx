@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GraduationCap, Search, User, BookOpen, Bookmark, LayoutDashboard, LogIn, Sparkles } from "lucide-react";
+import { GraduationCap, Search, BookOpen, LayoutDashboard, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import AuthModal from "@/components/AuthModal";
@@ -20,7 +20,7 @@ export const Navbar = () => {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       setIsSearchDialogOpen(false);

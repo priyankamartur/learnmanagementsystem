@@ -4,8 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { User, Sparkles, Save } from "lucide-react";
+import { Sparkles, Save } from "lucide-react";
 import { toast } from "sonner";
+
+interface ProfileModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onProfileUpdated?: (profile: any) => void;
+}
 
 const avatarOptions = [
   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
@@ -15,7 +21,7 @@ const avatarOptions = [
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop"
 ];
 
-export const ProfileModal = ({ isOpen, onClose, onProfileUpdated }) => {
+export const ProfileModal = ({ isOpen, onClose, onProfileUpdated }: ProfileModalProps) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [bio, setBio] = useState("");
@@ -39,7 +45,7 @@ export const ProfileModal = ({ isOpen, onClose, onProfileUpdated }) => {
     }
   }, [isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const updatedProfile = { name, role, bio, targetSkills, avatar };
     localStorage.setItem("user-profile", JSON.stringify(updatedProfile));

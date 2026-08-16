@@ -1,11 +1,17 @@
-import { useState, useEffect } from "react";
-import { Award, Printer, Share2, CheckCircle2, ShieldCheck, Edit } from "lucide-react";
+import { useState } from "react";
+import { Award, Printer, Share2, ShieldCheck, Edit } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import type { Course } from "@/data/courses";
 
-export const CertificatePanel = ({ course, onOpenFullModal }) => {
+interface CertificatePanelProps {
+  course: Course;
+  onOpenFullModal?: () => void;
+}
+
+export const CertificatePanel = ({ course, onOpenFullModal }: CertificatePanelProps) => {
   const [studentName, setStudentName] = useState(() => {
     const saved = localStorage.getItem("user-profile");
     if (saved) {

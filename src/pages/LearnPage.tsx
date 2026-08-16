@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { courses } from "@/data/courses";
+import type { Lesson, QuizQuestion } from "@/data/courses";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -14,12 +15,9 @@ import {
   BookOpen,
   Award,
   ArrowLeft,
-  ChevronRight,
   HelpCircle,
   FileText,
-  Save,
-  Sparkles,
-  Lock
+  Save
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -28,10 +26,10 @@ export const LearnPage = () => {
   const navigate = useNavigate();
   const course = courses.find((c) => c.id === courseId);
 
-  const [activeLesson, setActiveLesson] = useState(null);
-  const [completedLessons, setCompletedLessons] = useState([]);
+  const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
+  const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [noteText, setNoteText] = useState("");
-  const [activeQuiz, setActiveQuiz] = useState(null);
+  const [activeQuiz, setActiveQuiz] = useState<{ title: string; questions: QuizQuestion[] } | null>(null);
   const [isCertOpen, setIsCertOpen] = useState(false);
 
   useEffect(() => {
@@ -71,8 +69,8 @@ export const LearnPage = () => {
   const progressPercent = allLessons.length > 0 ? Math.round((completedLessons.length / allLessons.length) * 100) : 0;
   const isCourseComplete = progressPercent === 100;
 
-  const toggleLessonComplete = (lessonId) => {
-    let updated;
+  const toggleLessonComplete = (lessonId: string) => {
+    let updated: string[];
     if (completedLessons.includes(lessonId)) {
       updated = completedLessons.filter((id) => id !== lessonId);
       toast.info("Marked lesson as uncompleted");
@@ -243,7 +241,7 @@ export const LearnPage = () => {
 
                   {section.quiz && (
                     <button
-                      onClick={() => setActiveQuiz({ title: section.title, questions: section.quiz })}
+                      onClick={() => setActiveQuiz({ title: section.title, questions: section.quiz! })}
                       className="w-full mt-2 flex items-center justify-between p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 text-[11px] font-bold"
                     >
                       <span className="flex items-center gap-1.5">

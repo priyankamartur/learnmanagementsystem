@@ -5,19 +5,27 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
   CreditCard,
-  ShieldCheck,
   CheckCircle2,
   Lock,
   ArrowRight,
   Sparkles,
   Zap,
   Globe,
-  Loader2
+  Loader2,
+  ShieldCheck
 } from "lucide-react";
 import { toast } from "sonner";
+import type { Course } from "@/data/courses";
 
-export const PaymentModal = ({ isOpen, onClose, course, onPaymentSuccess }) => {
-  const [paymentMethod, setPaymentMethod] = useState("upi");
+interface PaymentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  course: Course;
+  onPaymentSuccess: () => void;
+}
+
+export const PaymentModal = ({ isOpen, onClose, course, onPaymentSuccess }: PaymentModalProps) => {
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "upi" | "gpay" | "paypal">("upi");
   const [cardName, setCardName] = useState("Alex Morgan");
   const [cardNumber, setCardNumber] = useState("4532 8921 4012 9842");
   const [expiry, setExpiry] = useState("08/28");
@@ -28,7 +36,7 @@ export const PaymentModal = ({ isOpen, onClose, course, onPaymentSuccess }) => {
 
   const discountAmount = course.originalPrice ? (course.originalPrice - course.price).toLocaleString("en-IN") : "0";
 
-  const handlePay = (e) => {
+  const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
     setProcessing(true);
 
@@ -126,7 +134,7 @@ export const PaymentModal = ({ isOpen, onClose, course, onPaymentSuccess }) => {
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => setPaymentMethod(item.id)}
+                      onClick={() => setPaymentMethod(item.id as any)}
                       className={`p-3 rounded-xl border text-xs font-semibold flex flex-col items-center justify-center gap-1.5 transition-all ${
                         isSelected
                           ? "border-primary bg-primary/10 text-primary font-bold ring-2 ring-primary/30"

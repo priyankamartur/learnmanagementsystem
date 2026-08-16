@@ -1,7 +1,14 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CertificatePanel from "@/components/CertificatePanel";
+import type { Course } from "@/data/courses";
 
-export const CertificateModal = ({ isOpen, onClose, course }) => {
+interface CertificateModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  course: Course | null;
+}
+
+export const CertificateModal = ({ isOpen, onClose, course }: CertificateModalProps) => {
   if (!course) return null;
 
   return (

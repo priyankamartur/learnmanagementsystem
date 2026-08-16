@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import CourseCard from "@/components/CourseCard";
@@ -27,7 +26,7 @@ import {
 export const Index = () => {
   const navigate = useNavigate();
 
-  const categoryIcons = {
+  const categoryIcons: Record<string, any> = {
     "Web Development": Code,
     "Data Science & AI": Brain,
     "Mobile Development": Smartphone,

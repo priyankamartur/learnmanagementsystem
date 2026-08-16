@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { courses } from "@/data/courses";
+import type { QuizQuestion } from "@/data/courses";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,15 +29,17 @@ export const CourseDetail = () => {
   const navigate = useNavigate();
   const course = courses.find((c) => c.id === courseId);
 
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "curriculum" | "instructor" | "reviews" | "faq">("overview");
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [activeQuiz, setActiveQuiz] = useState(null);
+
+  // Quiz Modal State
+  const [activeQuiz, setActiveQuiz] = useState<{ title: string; questions: QuizQuestion[] } | null>(null);
 
   useEffect(() => {
     if (course) {
-      const savedBookmarks = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
+      const savedBookmarks: string[] = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
       setIsBookmarked(savedBookmarks.includes(course.id));
     }
   }, [course]);
@@ -56,8 +59,8 @@ export const CourseDetail = () => {
   }
 
   const toggleBookmark = () => {
-    const savedBookmarks = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
-    let updated;
+    const savedBookmarks: string[] = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
+    let updated: string[];
     if (savedBookmarks.includes(course.id)) {
       updated = savedBookmarks.filter((id) => id !== course.id);
       setIsBookmarked(false);
@@ -192,7 +195,7 @@ export const CourseDetail = () => {
           ].map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => setActiveTab(tab.id as any)}
               className={`py-3 text-sm font-bold border-b-2 transition-all whitespace-nowrap ${
                 activeTab === tab.id
                   ? "border-primary text-primary"
@@ -282,7 +285,7 @@ export const CourseDetail = () => {
                         {section.quiz && (
                           <li className="pt-2">
                             <button
-                              onClick={() => setActiveQuiz({ title: section.title, questions: section.quiz })}
+                              onClick={() => setActiveQuiz({ title: section.title, questions: section.quiz! })}
                               className="w-full flex items-center justify-between p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-xs font-bold"
                             >
                               <span className="flex items-center gap-2">

@@ -6,7 +6,7 @@ import { courses, categories } from "@/data/courses";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, SlidersHorizontal, BookOpen, Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
+import { Search, SlidersHorizontal, BookOpen, Sparkles, ArrowLeft } from "lucide-react";
 
 const COURSES_PER_PAGE = 12;
 
@@ -54,7 +54,7 @@ export const CoursesPage = () => {
     return filteredCourses.slice(start, start + COURSES_PER_PAGE);
   }, [filteredCourses, currentPage]);
 
-  const handleCategoryChange = (cat) => {
+  const handleCategoryChange = (cat: string) => {
     setSelectedCategory(cat);
     setCurrentPage(1);
     setSearchParams({ category: cat, level: selectedLevel, q: searchQuery, sort: sortBy });

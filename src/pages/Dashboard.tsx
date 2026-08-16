@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { courses } from "@/data/courses";
+import type { Course } from "@/data/courses";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -24,14 +25,14 @@ import {
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-  const [enrolledCourses, setEnrolledCourses] = useState([]);
-  const [bookmarkedCourses, setBookmarkedCourses] = useState([]);
-  const [selectedCertCourse, setSelectedCertCourse] = useState(null);
+  const [enrolledCourses, setEnrolledCourses] = useState<{ course: Course; progress: number }[]>([]);
+  const [bookmarkedCourses, setBookmarkedCourses] = useState<Course[]>([]);
+  const [selectedCertCourse, setSelectedCertCourse] = useState<Course | null>(null);
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const [savedNotes, setSavedNotes] = useState([]);
+  const [savedNotes, setSavedNotes] = useState<{ courseId: string; lessonId: string; note: string }[]>([]);
 
-  const [activeTab, setActiveTab] = useState("courses");
+  const [activeTab, setActiveTab] = useState<"courses" | "certificates" | "bookmarks" | "notes">("courses");
 
   const [profile, setProfile] = useState(() => {
     const saved = localStorage.getItem("user-profile");
@@ -48,11 +49,11 @@ export const Dashboard = () => {
   });
 
   useEffect(() => {
-    const enrolled = [];
+    const enrolled: { course: Course; progress: number }[] = [];
     courses.forEach((c) => {
       const saved = localStorage.getItem(`progress-${c.id}`);
       if (saved) {
-        const completedSet = JSON.parse(saved);
+        const completedSet: string[] = JSON.parse(saved);
         const allLessons = c.sections.flatMap((s) => s.lessons);
         const pct = allLessons.length > 0 ? (completedSet.length / allLessons.length) * 100 : 0;
         enrolled.push({ course: c, progress: Math.min(100, Math.round(pct)) });
@@ -73,10 +74,10 @@ export const Dashboard = () => {
 
     setEnrolledCourses(enrolled);
 
-    const bookmarkedIds = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
+    const bookmarkedIds: string[] = JSON.parse(localStorage.getItem("user-bookmarks") || "[]");
     setBookmarkedCourses(courses.filter((c) => bookmarkedIds.includes(c.id)));
 
-    const notesArr = [];
+    const notesArr: { courseId: string; lessonId: string; note: string }[] = [];
     courses.forEach((c) => {
       c.sections.flatMap((s) => s.lessons).forEach((l) => {
         const noteText = localStorage.getItem(`note-${c.id}-${l.id}`);
@@ -208,7 +209,7 @@ export const Dashboard = () => {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => setActiveTab(tab.id as any)}
                 className={`py-3 text-sm font-bold border-b-2 flex items-center gap-2 transition-all whitespace-nowrap ${
                   activeTab === tab.id
                     ? "border-primary text-primary"

@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// In-memory / Persistent user profile database store
+// Persistent user profile database store
 const DB_FILE = path.join(__dirname, "userDb.json");
 
 const getDb = () => {
@@ -34,8 +34,8 @@ const getDb = () => {
         name: "Alex Morgan",
         role: "Software Developer & Lifelong Learner",
         avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
-        bio: "Passionate about full-stack web development, AI engineering, and building user-centric products.",
-        targetSkills: "React, Next.js, Python, AWS",
+        bio: "Passionate about full-stack web development, AI engineering, and building user-centric applications.",
+        targetSkills: "React, Next.js, Python, AWS, System Design",
         enrolledCourses: ["react-complete", "python-ml"],
         createdDate: "2026-01-15"
       }
@@ -47,14 +47,19 @@ const saveDb = (data) => {
   fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
 };
 
-// --- API ENDPOINTS ---
+// --- BACKEND API ENDPOINTS ---
 
-// Health Check
+// Health Check Endpoint
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", message: "LearnHub LMS Express Backend API is running!", totalCourses: courses.length });
+  res.json({
+    status: "ok",
+    service: "LearnHub LMS Express Backend API",
+    totalCourses: courses.length,
+    timestamp: new Date().toISOString()
+  });
 });
 
-// GET /api/courses - List courses with search, category, level, and pagination
+// GET /api/courses - List all courses with search, category filter, level filter & pagination
 app.get("/api/courses", (req, res) => {
   const { category, level, q, sort, page = 1, limit = 12 } = req.query;
 
@@ -107,7 +112,7 @@ app.get("/api/courses", (req, res) => {
   });
 });
 
-// GET /api/courses/:id - Single course details
+// GET /api/courses/:id - Fetch single course details
 app.get("/api/courses/:id", (req, res) => {
   const course = courses.find((c) => c.id === req.params.id);
   if (!course) {
@@ -116,7 +121,7 @@ app.get("/api/courses/:id", (req, res) => {
   res.json(course);
 });
 
-// POST /api/auth/register - Register new student profile
+// POST /api/auth/register - Register student account
 app.post("/api/auth/register", (req, res) => {
   const { name, email, password, role } = req.body;
   if (!name || !email || !password) {
@@ -149,7 +154,7 @@ app.post("/api/auth/register", (req, res) => {
   res.status(201).json({ message: "Registration successful!", user: userWithoutPassword });
 });
 
-// POST /api/auth/login - Authenticate student
+// POST /api/auth/login - Login student account
 app.post("/api/auth/login", (req, res) => {
   const { email, password } = req.body;
   const db = getDb();
@@ -163,7 +168,7 @@ app.post("/api/auth/login", (req, res) => {
   res.json({ message: "Login successful!", user: userWithoutPassword });
 });
 
-// GET /api/profile - Fetch student profile
+// GET /api/profile/:id - Get student profile
 app.get("/api/profile/:id", (req, res) => {
   const db = getDb();
   const user = db.users.find((u) => u.id === req.params.id);
@@ -174,7 +179,7 @@ app.get("/api/profile/:id", (req, res) => {
   res.json(userWithoutPassword);
 });
 
-// PUT /api/profile - Update student profile
+// PUT /api/profile/:id - Update student profile details
 app.put("/api/profile/:id", (req, res) => {
   const { name, role, bio, targetSkills, avatar } = req.body;
   const db = getDb();
@@ -197,5 +202,5 @@ app.put("/api/profile/:id", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 LearnHub LMS Express Backend Server running on http://localhost:${PORT}`);
+  console.log(`🚀 LearnHub LMS Express Backend API running on http://localhost:${PORT}`);
 });

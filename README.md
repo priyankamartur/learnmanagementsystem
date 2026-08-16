@@ -1,6 +1,18 @@
 # LearnHub LMS - Full-Stack Learning Management System
 
-LearnHub is a production-grade, state-of-the-art Learning Management System (LMS) built with React, TypeScript, Tailwind CSS, Shadcn UI, and a Node.js/Express backend API.
+![Engineered with Antigravity](https://img.shields.io/badge/Engineered%20With-Google%20DeepMind%20Antigravity%20AI-4285F4?style=for-the-badge&logo=google)
+![Stack](https://img.shields.io/badge/Tech%20Stack-React%20%7C%20TypeScript%20%7C%20Express-000000?style=for-the-badge)
+
+LearnHub is a state-of-the-art, production-grade Learning Management System (LMS) engineered by **Priyanka Martur** using **Google DeepMind Antigravity Agentic AI**.
+
+---
+
+## ⚡ Powered by Google DeepMind Antigravity AI
+
+This application was designed, architected, and built with **Google DeepMind Antigravity AI**, featuring:
+- **Full-Stack Modular Architecture**: React 18, TypeScript, Tailwind CSS, Shadcn UI frontend with a Node.js/Express REST backend API.
+- **52+ Interactive Technical Courses**: Complete dataset across 10 engineering domains formatted in Indian Rupees (₹).
+- **Payment & Certificate Engines**: Multi-method checkout modal (*Card, PayPal, GPay, UPI*) and gold-embellished verified certificate generation.
 
 ---
 
@@ -56,3 +68,9 @@ npm run dev
 - **Official Certificate Generator**: Printable & downloadable PDF certificates with custom student name & shareable Credential ID upon 100% course completion.
 - **Student Dashboard & Profile**: Dedicated student portal for course progress, active streak (🔥 5 Days), earned certificates, wishlist bookmarks, and saved lesson notes.
 - **Light & Dark Theme Switcher**: Dynamic theme toggle with local persistence.
+
+---
+
+### 🚀 Credits
+- **Developer**: Priyanka Martur
+- **AI Pair Programmer**: Google DeepMind Antigravity Agentic AI
